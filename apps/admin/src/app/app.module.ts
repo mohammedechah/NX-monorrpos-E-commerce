@@ -89,7 +89,7 @@ const UX_MODULE = [
     CategoriesService,
     MessageService,
     ConfirmationService,
-     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

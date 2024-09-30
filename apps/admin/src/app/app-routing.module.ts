@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { ShellComponent } from './shared/shell/shell.component';
-import { AuthGuard } from '@bluebits/users';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
@@ -11,12 +10,14 @@ import { UsersFormComponent } from './pages/users/users-form/users-form.componen
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@bluebits/users';
+
 
 const routes: Routes = [
   {
     path: '',
     component: ShellComponent,
-    canActivate: [AuthGuard],
+    canActivate: [],
     children: [
       {
         path: '',
