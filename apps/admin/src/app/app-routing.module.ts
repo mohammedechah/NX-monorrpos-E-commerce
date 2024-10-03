@@ -10,14 +10,17 @@ import { UsersFormComponent } from './pages/users/users-form/users-form.componen
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '@bluebits/users';
+import { authGuard } from '@bluebits/users';
+import { LoginComponent } from 'libs/users/src/lib/pages/login/login.component';
+
 
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   {
     path: '',
     component: ShellComponent,
-    canActivate: [],
+    canActivate: [authGuard],
     children: [
       {
         path: '',

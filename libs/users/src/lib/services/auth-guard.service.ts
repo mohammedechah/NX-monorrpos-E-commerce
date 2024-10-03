@@ -1,26 +1,27 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
 import { LocalstorageService } from './localstorage.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private localStorageToken: LocalstorageService) {}
+export const authGuard: CanActivateFn = (route, state) => {
+  const router = inject(Router);
+  const localStorageToken = inject(LocalstorageService);
+  const token = localStorageToken.getToken();
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const token = this.localStorageToken.getToken();
+  if (state.url === '/login') {
+    return true; // Avoid looping on login page
+  }
 
-    if (token) {
-      const tokenDecode = JSON.parse(atob(token.split('.')[1]));
-      if (tokenDecode.isAdmin && !this._tokenExpired(tokenDecode.exp)) return true;
+  if (token) {
+    const tokenDecode = JSON.parse(atob(token.split('.')[1]));
+    if (tokenDecode.isAdmin && !isTokenExpired(tokenDecode.exp)) {
+      return true;
     }
-
-    this.router.navigate(['/login']);
-    return false;
   }
 
-  private _tokenExpired(expiration :any ): boolean {
-    return Math.floor(new Date().getTime() / 1000) >= expiration;
-  }
-}
+  router.navigate(['/login']);
+  return false;
+};
+
+const isTokenExpired = (expiration: any): boolean => {
+  return Math.floor(new Date().getTime() / 1000) >= expiration;
+};
