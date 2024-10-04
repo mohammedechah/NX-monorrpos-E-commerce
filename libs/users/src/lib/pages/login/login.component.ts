@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styles: [],
 })
 export class LoginComponent implements OnInit {
-  loginFormGroup: FormGroup;
+  loginFormGroup!: FormGroup;
   isSubmitted = false;
   authError = false;
   authMessage = 'Email or Password are wrong';
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.isSubmitted = true;
 
     this.auth
-      .login(this.loginForm.email.value, this.loginForm.password.value)
+      .login(this.loginForm['email'].value, this.loginForm['password'].value)
       .subscribe(
         (user) => {
           this.authError = false;

@@ -2,7 +2,7 @@ export class User {
     id?: string;
     name?: string;
     password?: string;
-    email: string;
+    email: string;  // Email is required and will be initialized in the constructor
     phone?: string;
     token?: string;
     isAdmin?: true;
@@ -11,4 +11,9 @@ export class User {
     zip?: string;
     city?: string;
     country?: string;
+
+    // Constructor to initialize email
+    constructor(email: string) {
+        this.email = email;
+    }
 }

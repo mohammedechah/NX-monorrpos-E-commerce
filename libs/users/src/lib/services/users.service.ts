@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from '@env/environments';
 import * as countriesLib from 'i18n-iso-countries';
-declare const require;
+declare const require : any;
 
 @Injectable({
   providedIn: 'root'

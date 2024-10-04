@@ -22,39 +22,36 @@ export class ProductsListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Subscribe to the route params and determine if category filter is active
+    
     this.route.params.subscribe((params) => {
       const categoryid = params['categoryid'];
       if (categoryid) {
-        // Use category filter if categoryid is present in the URL
         this._getProducts([categoryid]);
         this.isCategoryPage = true;
       } else {
-        // Otherwise, get all products
         this._getProducts();
         this.isCategoryPage = false;
       }
     });
 
-    // Fetch all categories for filtering
     this._getCategories();
   }
 
-  // Get products with optional category filter
+
   private _getProducts(categoriesFilter?: string[]) {
     this.prodServices.getProducts(categoriesFilter).subscribe((products) => {
       this.products = products;
     });
   }
 
-  // Fetch categories for displaying filters
+
   private _getCategories() {
     this.cateService.getCategories().subscribe((categories) => {
       this.categories = categories;
     });
   }
 
-  // Handle category-based product filtering
+
   categoryFilter() {
     const selectedCategories: any[] = this.categories
       .filter((category) => category.checked)
