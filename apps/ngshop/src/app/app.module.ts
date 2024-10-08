@@ -8,10 +8,14 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { UiModule } from '@bluebits/ui';
 import { AccordionModule } from 'primeng/accordion';
+import { ToastModule } from 'primeng/toast';
 import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from '@bluebits/products';
 import { HttpClientModule } from '@angular/common/http';
 import { OrdersModule } from '@bluebits/orders';
+import { MessageService } from 'primeng/api';
+import { MessagesComponent } from './shared/messages/messages.component';
+
 
 const routes: Routes = [{ path: '', component: HomePageComponent }];
 @NgModule({
@@ -21,6 +25,7 @@ const routes: Routes = [{ path: '', component: HomePageComponent }];
     HeaderComponent,
     FooterComponent,
     NavComponent,
+    MessagesComponent,
   ],
   imports: [
     ProductsModule,
@@ -30,9 +35,14 @@ const routes: Routes = [{ path: '', component: HomePageComponent }];
     RouterModule.forRoot(routes),
     UiModule,
     AccordionModule,
-    OrdersModule
+    OrdersModule,
+    ToastModule,
+    ProductsModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent],
+  exports: [
+    MessagesComponent
+  ],
 })
 export class AppModule {}

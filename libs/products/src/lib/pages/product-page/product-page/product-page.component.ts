@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Product } from '../../../models/product';
 import { ProductsService } from '../../../services/products.service';
+import { CartItem, CartService } from '@bluebits/orders';
 
 
 
@@ -20,7 +21,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   constructor(
     private prodService: ProductsService,
     private route: ActivatedRoute,
-    
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +38,11 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   }
 
   addProductToCart(){
-    
+    const cartItem : CartItem = {
+      productId: this.product.id,
+      quantity: this.quantity
+    }
+    this.cartService.setCartItem(cartItem);
   }
 
   private _getProduct(id: string) {
