@@ -37,7 +37,6 @@ const routes: Routes = [{ path: '', component: HomePageComponent }];
     AccordionModule,
     OrdersModule,
     ToastModule,
-    ProductsModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],
