@@ -11,11 +11,13 @@ import { AccordionModule } from 'primeng/accordion';
 import { ToastModule } from 'primeng/toast';
 import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from '@bluebits/products';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { OrdersModule } from '@bluebits/orders';
 import { MessageService } from 'primeng/api';
 import { MessagesComponent } from './shared/messages/messages.component';
-
+import { JwtInterceptor, UsersModule } from '@bluebits/users';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 const routes: Routes = [{ path: '', component: HomePageComponent }];
 @NgModule({
@@ -30,6 +32,8 @@ const routes: Routes = [{ path: '', component: HomePageComponent }];
   imports: [
     ProductsModule,
     BrowserModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
@@ -37,11 +41,10 @@ const routes: Routes = [{ path: '', component: HomePageComponent }];
     AccordionModule,
     OrdersModule,
     ToastModule,
+    UsersModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent],
-  exports: [
-    MessagesComponent
-  ],
+  exports: [MessagesComponent],
 })
 export class AppModule {}

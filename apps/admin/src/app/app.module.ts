@@ -38,6 +38,8 @@ import { UsersFormComponent } from './pages/users/users-form/users-form.componen
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import { AppRoutingModule } from './app-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 const UX_MODULE = [
   FieldsetModule,
@@ -78,6 +80,8 @@ const UX_MODULE = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
